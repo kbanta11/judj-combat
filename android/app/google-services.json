@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "647671017954",
+    "firebase_url": "https://judj-combat.firebaseio.com",
+    "project_id": "judj-combat",
+    "storage_bucket": "judj-combat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647671017954:android:212cc17018e97eb992c9bb",
+        "android_client_info": {
+          "package_name": "com.app.judj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647671017954-me1jq2m3epaksj3uib7cnq5f3acovm1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUomGKmaXGgZMgLnsND_SYPuLQUAjWzlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647671017954-me1jq2m3epaksj3uib7cnq5f3acovm1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
