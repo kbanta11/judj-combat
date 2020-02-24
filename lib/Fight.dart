@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:judj_app/Profile.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'ScoreList.dart';
 import 'EventPage.dart';
 import 'models.dart';
@@ -47,7 +49,6 @@ class FightDetails extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 15, right: 15),
                     child: Container(
-                      height: 160,
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -76,12 +77,22 @@ class FightDetails extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                 width: 120,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Row(
                                   children: <Widget>[
-                                    Text(fight.redFighter['first_name'] ?? '', textAlign: TextAlign.start, style: TextStyle(fontSize: 18.0, color: Colors.white),),
-                                    Text(fight.redFighter['last_name'] ?? '', textAlign: TextAlign.start, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
-                                    Text('${fight.redFighter['wins'].toInt()}-${fight.redFighter['losses'].toInt()}-${fight.redFighter['draws'].toInt()}', style: TextStyle(color: Colors.white)),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(fight.redFighter['first_name'] ?? '', textAlign: TextAlign.start, style: TextStyle(fontSize: 18.0, color: Colors.white),),
+                                          Text(fight.redFighter['last_name'] ?? '', textAlign: TextAlign.start, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                                          Text('${fight.redFighter['wins'].toInt()}-${fight.redFighter['losses'].toInt()}-${fight.redFighter['draws'].toInt()}', style: TextStyle(color: Colors.white)),
+                                        ],
+                                      ),
+                                    ),
+                                    fight.winner == 'red' ? Padding(
+                                      padding: EdgeInsets.only(left: 5.0),
+                                      child: FaIcon(FontAwesomeIcons.fistRaised, color: Colors.green, size: 30,),
+                                    ) : Container()
                                   ],
                                 ),
                               ),
@@ -96,12 +107,23 @@ class FightDetails extends StatelessWidget {
                               ),
                               Container(
                                 width: 120,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: <Widget>[
-                                    Text(fight.blueFighter['first_name'] ?? '', textAlign: TextAlign.end, style: TextStyle(fontSize: 18.0, color: Colors.white),),
-                                    Text(fight.blueFighter['last_name'] ?? '', textAlign: TextAlign.end, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),),
-                                    Text('${fight.blueFighter['wins'].toInt()}-${fight.blueFighter['losses'].toInt()}-${fight.blueFighter['draws'].toInt()}', style: TextStyle(color: Colors.white),),
+                                    fight.winner == 'blue' ? Padding(
+                                      padding: EdgeInsets.only(right: 5.0),
+                                      child: FaIcon(FontAwesomeIcons.fistRaised, color: Colors.green, size: 30,),
+                                    ) : Container(),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Text(fight.blueFighter['first_name'] ?? '', textAlign: TextAlign.end, style: TextStyle(fontSize: 18.0, color: Colors.white),),
+                                          Text(fight.blueFighter['last_name'] ?? '', textAlign: TextAlign.end, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                                          Text('${fight.blueFighter['wins'].toInt()}-${fight.blueFighter['losses'].toInt()}-${fight.blueFighter['draws'].toInt()}', style: TextStyle(color: Colors.white),),
+                                        ],
+                                      )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -149,8 +171,8 @@ class FightDetails extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -159,6 +181,17 @@ class FightDetails extends StatelessWidget {
                           color: Colors.deepOrange,
                           onPressed: () {
                             nav.updateNavigation(ScoreList(fight.id));
+                          },
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: OutlineButton(
+                          child: Text('View User Profile', style: TextStyle(color: Colors.deepOrange, fontSize: 20),),
+                          color: Colors.deepOrange,
+                          borderSide: BorderSide(color: Colors.deepOrange),
+                          onPressed: () {
+                            nav.updateNavigation(ProfilePage(score.userId));
                           },
                         ),
                       )

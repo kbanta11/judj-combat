@@ -13,7 +13,8 @@ db = firestore.client()
 def process_csv(filepath):
     batch = db.batch()
     with open(filepath, newline = '') as file:
-        df = pd.read_csv(file, delimiter=',')
+        df = pd.read_csv(file, delimiter=',', encoding = 'utf-8-sig')
+        df.rename({df.columns[1]: 'name'}, inplace = True)
         df['date'] = pd.to_datetime(df['date'])
         df['date'] = df['date'].apply(lambda x: x.replace(tzinfo=pytz.timezone('America/Los_Angeles')))
         df = df.replace(np.nan, '', regex=True)

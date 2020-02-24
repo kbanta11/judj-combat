@@ -53,29 +53,33 @@ class ProfilePage extends StatelessWidget {
                               create: (context) => DBService().streamFightData(score.fightId),
                               child: Consumer<Fight>(
                                 builder: (context, fight, _) {
-                                  return InkWell(
-                                    child: Row(
-                                      children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
-                                            Text(fight.redFighter['first_name'], style: TextStyle(color: Colors.white, fontSize: 14.0),),
-                                            Text(fight.redFighter['last_name'], style: TextStyle(color: Colors.white, fontSize: 16.0),),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text('${fight.weightclass}', style: TextStyle(color: Colors.white,),),
-                                            SizedBox(height: 10.0,),
-                                            Text('${score.redTotal} - ${score.blueTotal}', style: TextStyle(color: Colors.white),)
-                                          ],
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text(fight.blueFighter['first_name'], style: TextStyle(color: Colors.white, fontSize: 14.0),),
-                                            Text(fight.blueFighter['last_name'], style: TextStyle(color: Colors.white, fontSize: 16.0),),
-                                          ],
-                                        )
-                                      ],
+                                  return fight == null ? Container() : InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: 8, right: 8),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Column(
+                                            children: <Widget>[
+                                              Text(fight.redFighter['first_name'], style: TextStyle(color: Colors.white, fontSize: 16.0),),
+                                              Text(fight.redFighter['last_name'], style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              Text('${fight.weightclass}', style: TextStyle(color: Colors.white, fontSize: 16),),
+                                              SizedBox(height: 10.0,),
+                                              Text('${score.redTotal} - ${score.blueTotal}', style: TextStyle(color: Colors.white, fontSize: 20),)
+                                            ],
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              Text(fight.blueFighter['first_name'], style: TextStyle(color: Colors.white, fontSize: 16.0),),
+                                              Text(fight.blueFighter['last_name'], style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),),
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     )
                                   );
                                 },
